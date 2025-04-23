@@ -1,10 +1,15 @@
-# Core libraries for pose detection
-opencv-python>=4.5.0
-mediapipe>=0.8.10
-
-# Common dependencies
+# Core requirements with verified versions
+mediapipe==0.10.21
+tensorflow==2.19.0
+tensorflow-metal==1.2.0  # For macOS GPU acceleration
+opencv-python==4.11.0    # Version from our test
 numpy>=1.20.0
 pygame>=2.5.0
 
-# For Mac users only
-# PyObjC  # Uncomment if on macOS
+# Mac-specific requirements
+PyObjC  # For macOS audio support
+
+# Notes:
+# - Python 3.11.12 or higher recommended
+# - On macOS, GPU acceleration is handled through Metal via tensorflow-metal
+# - Additional media codecs may be required for video processing
