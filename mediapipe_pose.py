@@ -26,7 +26,7 @@ cv2.resizeWindow(window_name, FRAME_WIDTH, FRAME_HEIGHT)
 
 # --- โหลดไฟล์เสียง --- 
 incorrect_sound = pygame.mixer.Sound('audio/EX_incorrect.mp3')
-incorrect_sound.set_volume(0.5)
+incorrect_sound.set_volume(0)
 accident_sound  = pygame.mixer.Sound('audio/EX_accident.mp3')
 accident_sound.set_volume(0.5)
 
@@ -42,11 +42,11 @@ mp_pose    = mp.solutions.pose
 
 with mp_pose.Pose(
         static_image_mode=False,
-        model_complexity=1,
+        model_complexity=2,
         enable_segmentation=False,
         smooth_landmarks=True,
-        min_detection_confidence=0.7,
-        min_tracking_confidence=0.7) as pose:
+        min_detection_confidence=0.5,
+        min_tracking_confidence=0.5) as pose:
 
     while cap.isOpened():
         ret, frame = cap.read()
@@ -69,8 +69,8 @@ with mp_pose.Pose(
             lm = results.pose_landmarks.landmark
 
             # --- Posture Check (ไหล่ซ้าย-สะโพกซ้าย) ---
-            shoulder = lm[mp_pose.PoseLandmark.LEFT_SHOULDER]
-            hip      = lm[mp_pose.PoseLandmark.LEFT_HIP]
+            shoulder = lm[mp_pose.PoseLandmark.RIGHT_SHOULDER]
+            hip      = lm[mp_pose.PoseLandmark.RIGHT_HIP]
             angle    = calculate_angle(shoulder, hip)
 
             if 78 < angle < 112.3:

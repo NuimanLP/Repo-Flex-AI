@@ -4,4 +4,7 @@ mediapipe>=0.8.10
 
 # Common dependencies
 numpy>=1.20.0
+pygame>=2.5.0
 
+# For Mac users only
+# PyObjC  # Uncomment if on macOS
