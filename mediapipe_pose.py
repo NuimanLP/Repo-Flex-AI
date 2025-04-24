@@ -121,7 +121,7 @@ FRAME_HEIGHT = 650
 
 
 # Camera setup
-CAMERA_INDEX = 1  # Start with default camera
+CAMERA_INDEX = 4 # Start with default camera
 cap = cv2.VideoCapture(CAMERA_INDEX)
 if not cap.isOpened():
     print(f"Camera index {CAMERA_INDEX} failed, trying index 1...")
@@ -315,7 +315,7 @@ while cap.isOpened():
                 (180, FRAME_HEIGHT - 60), cv2.FONT_HERSHEY_SIMPLEX, 0.6, detection_color, 2)
 
     # Show posture angle reference
-    cv2.putText(frame, "Good Posture Range: 78° - 112°", (10, FRAME_HEIGHT - 30),
+    cv2.putText(frame, "Good Posture Range: 85° - 105°", (10, FRAME_HEIGHT - 30),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, GOOD_POSTURE_COLOR, 2)
     # Display frame
     cv2.imshow(window_name, frame)
