@@ -1,3 +1,142 @@
+# MediaPipe Pose Detection for Images
+
+A powerful Python script for batch processing images with MediaPipe's pose detection capabilities. The script can detect human poses in images, visualize anatomical landmarks, determine posture correctness, and process multiple images in a single command.
+
+## Features
+
+- Process single images or batches of images in one command
+- GPU acceleration for faster processing (Metal on macOS, CUDA on other platforms)
+- Customizable resolution settings for different use cases
+- Detailed pose visualization with colored landmarks and connections
+- Posture analysis with angle measurement
+- Command-line interface with multiple options
+- Progress tracking for batch processing
+
+## Requirements
+
+- Python 3.7+
+- OpenCV (`pip install opencv-python`)
+- MediaPipe (`pip install mediapipe`)
+- NumPy (`pip install numpy`)
+- A compatible GPU for acceleration (optional but recommended)
+
+## Basic Usage
+
+### Processing a Single Image
+
+```bash
+python mediapipe_img.py --image path/to/image.jpg --output path/to/output.jpg
+```
+
+### Processing Multiple Images
+
+```bash
+python mediapipe_img.py --images image1.jpg image2.jpg image3.jpg --output output_directory/
+```
+
+### Processing an Entire Directory of Images
+
+```bash
+python mediapipe_img.py --dir input_directory/ --output output_directory/
+```
+
+## Command-Line Arguments
+
+| Argument | Description |
+|----------|-------------|
+| `--image` | Path to a single input image |
+| `--images` | Paths to multiple input images (space-separated) |
+| `--dir` | Directory containing input images to process |
+| `--output` | Path for output: file path for single image or directory for multiple images |
+| `--output-dir` | Alternative directory for saving multiple output images |
+| `--show` | Display processed images (may be slow for many images) |
+| `--resolution` | Resolution preset to use (low, medium, hd, full_hd, custom) |
+
+## Resolution Options
+
+The script supports different resolution presets that affect both processing speed and detection quality:
+
+| Preset | Resolution | Description |
+|--------|------------|-------------|
+| `low` | 640x480 | Fast processing, less detail |
+| `medium` | 800x600 | Balanced performance and quality |
+| `hd` | 1280x720 | Good detail with reasonable performance (default) |
+| `full_hd` | 1920x1080 | High detail but slower processing |
+| `custom` | 1500x1200 | Very high detail, slowest processing |
+
+Example:
+```bash
+python mediapipe_img.py --dir images/ --output results/ --resolution hd
+```
+
+## Model Complexity
+
+The script currently uses the "lite" model variant (`pose_landmarker_lite.task`), which offers a good balance between speed and accuracy. MediaPipe also offers:
+
+- **Lite model**: Fast processing, good for real-time applications
+- **Full model**: Better accuracy, larger model size, slower processing
+- **Heavy model**: Highest accuracy, largest model size, slowest processing
+
+To use a different model complexity:
+
+1. Download the desired model:
+   - Full: [pose_landmarker_full.task](https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task)
+   - Heavy: [pose_landmarker_heavy.task](https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/1/pose_landmarker_heavy.task)
+
+2. Place the downloaded model in the same directory as the script
+
+3. Update the `MODEL_PATH` variable in the script to point to your desired model
+
+## Example Use Cases
+
+### Fast Processing for Many Images
+
+```bash
+python mediapipe_img.py --dir many_images/ --output results/ --resolution low
+```
+
+### Highest Quality Detection
+
+```bash
+python mediapipe_img.py --dir important_images/ --output detailed_results/ --resolution full_hd
+```
+
+### Interactive Mode with Image Display
+
+```bash
+python mediapipe_img.py --dir images/ --output results/ --show
+```
+
+### Process Images with Specific Naming Pattern
+
+```bash
+python mediapipe_img.py --images photo1.jpg photo2.jpg photo5.jpg --output specific_results/
+```
+
+## Output Format
+
+Processed images will include:
+- Skeletal visualization with colored joints and connections
+- Posture angle calculation
+- Detection status information
+- GPU acceleration status
+
+Each processed image is saved with `_processed` appended to the original filename:
+- `original.jpg` → `original_processed.jpg`
+
+## Troubleshooting
+
+- If you encounter "GPU acceleration failed" messages, the script will automatically fall back to CPU processing
+- For "Model file not found" errors, the script uses the bundled MediaPipe model
+- If no pose is detected in an image, the image will be processed but no skeleton will be drawn
+
+## Performance Considerations
+
+- Higher resolutions provide better detection quality but slower processing
+- Using a compatible GPU significantly improves processing speed
+- When processing many images, avoid using the `--show` option to maximize throughput
+- For best performance on macOS, Metal acceleration is used automatically
+
 # Posture Detection Program
 
 ## What This Program Does
