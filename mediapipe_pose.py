@@ -290,7 +290,7 @@ while cap.isOpened():
                 last_fall = now
                 
         # Display information
-        cv2.putText(frame, f"Angle: {angle:.1f}°", (10, 30),
+        cv2.putText(frame, f"Angle: {angle:.1f}", (10, 30),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
         cv2.putText(frame, posture, (10, 60),
                     cv2.FONT_HERSHEY_SIMPLEX, 1.0, color, 2)
@@ -315,7 +315,7 @@ while cap.isOpened():
                 (180, FRAME_HEIGHT - 60), cv2.FONT_HERSHEY_SIMPLEX, 0.6, detection_color, 2)
 
     # Show posture angle reference
-    cv2.putText(frame, "Good Posture Range: 85° - 105°", (10, FRAME_HEIGHT - 30),
+    cv2.putText(frame, "Good Posture Range: 85 - 105", (10, FRAME_HEIGHT - 30),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, GOOD_POSTURE_COLOR, 2)
     # Display frame
     cv2.imshow(window_name, frame)
