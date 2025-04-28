@@ -121,7 +121,7 @@ FRAME_HEIGHT = 650
 
 
 # Camera setup
-CAMERA_INDEX = 4 # Start with default camera
+CAMERA_INDEX = 1 # Start with default camera
 cap = cv2.VideoCapture(CAMERA_INDEX)
 if not cap.isOpened():
     print(f"Camera index {CAMERA_INDEX} failed, trying index 1...")
