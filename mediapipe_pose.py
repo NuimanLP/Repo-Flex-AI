@@ -121,7 +121,7 @@ FRAME_HEIGHT = 650
 
 
 # Camera setup
-CAMERA_INDEX = 1 # Start with default camera
+CAMERA_INDEX = 0     # Start with default camera
 cap = cv2.VideoCapture(CAMERA_INDEX)
 if not cap.isOpened():
     print(f"Camera index {CAMERA_INDEX} failed, trying index 1...")
@@ -249,7 +249,7 @@ while cap.isOpened():
         hip = lm[LEFT_HIP]
         angle = calculate_angle(shoulder, hip)
         
-        if 85 < angle < 105:
+        if 60 < angle < 105:
             color = GOOD_POSTURE_COLOR
             posture = "Correct Posture"
         else:
